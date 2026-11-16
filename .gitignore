@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Merkbestanden alleen lokaal houden, niet publiceren
+brand/
