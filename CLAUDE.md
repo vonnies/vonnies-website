@@ -120,7 +120,7 @@ Eigen domein koppelen, zodra het domein vastligt:
 ## Openstaande punten
 
 - [x] **Domein bevestigd:** `vonnieswaxenslijpservice.nl`, geregistreerd bij Versio (DNS ook bij Versio). `CNAME`-bestand staat in de repo.
-- [ ] DNS bij Versio omzetten naar GitHub Pages en daarna “Enforce HTTPS” aanzetten. **Let op:** de e-mail draait via iCloud. Laat de MX-, TXT- (`apple-domain`, `v=spf1`) en eventuele `sig1._domainkey`-records altijd staan.
+- [x] DNS bij Versio wijst naar GitHub Pages (4× A, 4× AAAA, `www` CNAME naar `vonnies.github.io`); HTTPS-certificaat goedgekeurd en “Enforce HTTPS” staat aan (16-11-2026). **Let op:** de e-mail draait via iCloud. Laat de MX-, TXT- (`apple-domain`, `v=spf1`) en eventuele `sig1._domainkey`-records altijd staan.
 - [ ] Hotwax-foto (strijkijzer op het board) toevoegen aan de foto-impressie zodra die er is.
 - [ ] Websitelink in de Instagram-bio zetten.
 - [ ] Google Bedrijfsprofiel aanmaken (Jeroen), met exact dezelfde gegevens als hierboven.
