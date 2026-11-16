@@ -80,7 +80,7 @@ Lokaal bekijken: `python3 -m http.server 8000` in de repo-map en open http://loc
 - Bestandsnaam beschrijvend en met zoekwoorden, kleine letters met streepjes: `snowboard-hotwax-werkplaats.webp`.
 - Altijd `width`, `height`, `alt` (Nederlands, beschrijvend) en `loading="lazy"` (behalve boven de vouw).
 - Mensen op foto’s die niet Jeroen zijn: alleen met hun toestemming.
-- Foto-raster: `.photos` met klassen `p1`–`p4` (werkplaats) en `m1`–`m5` (op de berg); grid van 6 kolommen, mobiel 2.
+- Foto-raster: `.photos` met klassen `p1`–`p6` (werkplaats; `p5`/`p6` zijn de twee staande hotwax-foto’s naast elkaar) en `m1`–`m5` (op de berg); grid van 6 kolommen, mobiel 2.
 
 ## SEO (niet slopen)
 
@@ -121,6 +121,6 @@ Eigen domein koppelen, zodra het domein vastligt:
 
 - [x] **Domein bevestigd:** `vonnieswaxenslijpservice.nl`, geregistreerd bij Versio (DNS ook bij Versio). `CNAME`-bestand staat in de repo.
 - [x] DNS bij Versio wijst naar GitHub Pages (4× A, 4× AAAA, `www` CNAME naar `vonnies.github.io`); HTTPS-certificaat goedgekeurd en “Enforce HTTPS” staat aan (16-11-2026). **Let op:** de e-mail draait via iCloud. Laat de MX-, TXT- (`apple-domain`, `v=spf1`) en eventuele `sig1._domainkey`-records altijd staan.
-- [ ] Hotwax-foto (strijkijzer op het board) toevoegen aan de foto-impressie zodra die er is.
-- [ ] Websitelink in de Instagram-bio zetten.
-- [ ] Google Bedrijfsprofiel aanmaken (Jeroen), met exact dezelfde gegevens als hierboven.
+- [x] Hotwax-foto’s toegevoegd aan de foto-impressie (`p5`, `p6`).
+- [x] Websitelink in de Instagram-bio gezet.
+- [x] Google Bedrijfsprofiel aangemaakt. Houd naam, adres en telefoon daar altijd gelijk aan deze site.
