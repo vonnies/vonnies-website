@@ -1,0 +1,10 @@
+# GitHub Pages bouwt de site met Jekyll. index.html, css, js en img hebben geen
+# front matter en worden dus ongewijzigd gepubliceerd.
+# Alles hieronder is intern en komt NIET online. Nieuwe interne bestanden of mappen hier toevoegen.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - docs
+  - tools
+  - brand
+  - .gitignore
