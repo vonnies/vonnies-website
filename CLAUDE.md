@@ -104,6 +104,7 @@ Lokaal bekijken: `python3 -m http.server 8000` in de repo-map en open http://loc
    - prijzen/tijden overal gelijk (zie lijst hierboven)
    - geen kapotte afbeeldingen, alle `img` hebben `alt`
 4. Geen externe scripts of trackers toevoegen zonder overleg (privacy + snelheid).
+5. **CSS of JS aangepast? Verhoog het versienummer** achter `css/style.css?v=…` en `js/main.js?v=…` in `index.html` (gebruik de datum, bijv. `?v=20261118`). GitHub Pages laat browsers bestanden 10 minuten bewaren; zonder nieuw versienummer krijgen bezoekers na een release de nieuwe HTML met de oude CSS/JS, en dan werkt bijvoorbeeld het menu niet.
 
 ## Eerste keer opzetten (GitHub Pages)
 
