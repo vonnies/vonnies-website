@@ -193,6 +193,24 @@ section h2.shout{font-size:clamp(34px,5vw,56px); margin-bottom:28px}
   .colhead.c2{order:4; margin-top:20px}.card.c2.r1{order:5}.card.c2.r2{order:6}.card.c2.r3{order:7}.card.wide{order:8}
 }
 
+/* veelgestelde vragen (uitklapbaar: de tekst staat in de HTML en is met één klik leesbaar) */
+.faq-group{margin-bottom:44px}
+.faq-group h3{margin:0; padding-bottom:10px; border-bottom:3px solid var(--line); font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--purple)}
+.faq details{border-bottom:2px solid var(--purple)}
+.faq summary{list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0; font-weight:700; font-size:clamp(17px,1.8vw,19px); line-height:1.35}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover span{text-decoration:underline; text-decoration-color:var(--purple); text-decoration-thickness:2px; text-underline-offset:4px}
+.faq .plus{flex:none; position:relative; width:32px; height:32px; border-radius:50%; background:var(--yellow); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--purple)}
+.faq .plus::before,.faq .plus::after{content:""; position:absolute; left:50%; top:50%; width:12px; height:2.5px; background:var(--on-yellow); transform:translate(-50%,-50%); transition:transform .2s}
+.faq .plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq details[open] .plus::after{transform:translate(-50%,-50%) rotate(0deg)}
+.faq .answer{padding:0 0 22px; max-width:68ch}
+.faq .answer p{margin:0 0 12px}
+.faq .answer p:last-child{margin-bottom:0}
+.faq-more{display:flex; align-items:center; justify-content:space-between; gap:20px 32px; flex-wrap:wrap}
+.faq-more p{max-width:58ch}
+@media (prefers-reduced-motion:reduce){.faq .plus::before,.faq .plus::after{transition:none}}
+
 /* contact */
 .contact{background:var(--yellow); color:var(--on-yellow); padding:72px 0 48px; margin-top:40px}
 .contact .shout{color:var(--on-yellow); text-shadow:.07em .07em 0 #9D33D6}
