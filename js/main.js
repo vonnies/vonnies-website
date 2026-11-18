@@ -1,3 +1,14 @@
+/* ---- Mobiel menu ---- */
+(function(){
+  var top=document.querySelector('.top'), btn=top&&top.querySelector('.menu-btn');
+  if(!btn) return;
+  function set(open){ top.classList.toggle('open',open); btn.setAttribute('aria-expanded',open?'true':'false'); }
+  btn.addEventListener('click',function(){ set(!top.classList.contains('open')); });
+  top.querySelectorAll('nav a').forEach(function(a){ a.addEventListener('click',function(){ set(false); }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && top.classList.contains('open')){ set(false); btn.focus(); } });
+  document.addEventListener('click',function(e){ if(!top.contains(e.target)) set(false); });
+})();
+
 /* ---- Keuzehulp ---- */
 (function(){
   var WAX = {

@@ -36,12 +36,28 @@ a{color:inherit}
 .top nav{display:flex; gap:22px; flex-wrap:wrap; font-weight:600; font-size:15px}
 .top nav a{text-decoration:none; border-bottom:2px solid transparent}
 .top nav a:hover{border-color:var(--purple)}
-@media (max-width:760px){.top nav{display:none}}
+/* menuknop: alleen op mobiel. Het menu klapt open als vakje in de huisstijl. */
+.menu-btn{display:none; align-items:center; gap:10px; font:inherit; font-weight:700; font-size:15px; padding:9px 18px; border:2.5px solid var(--ink); border-radius:999px; background:transparent; color:var(--ink); box-shadow:4px 4px 0 var(--purple); cursor:pointer}
+.menu-icon,.menu-icon::before,.menu-icon::after{display:block; width:18px; height:2.5px; background:currentColor; border-radius:2px; position:relative; transition:transform .2s, background .2s}
+.menu-icon::before,.menu-icon::after{content:""; position:absolute; left:0}
+.menu-icon::before{top:-6px} .menu-icon::after{top:6px}
+.top.open .menu-icon{background:transparent}
+.top.open .menu-icon::before{transform:translateY(6px) rotate(45deg)}
+.top.open .menu-icon::after{transform:translateY(-6px) rotate(-45deg)}
+@media (prefers-reduced-motion:reduce){.menu-icon,.menu-icon::before,.menu-icon::after{transition:none}}
+@media (max-width:760px){
+  .menu-btn{display:inline-flex}
+  .top nav{display:none; position:absolute; top:100%; left:16px; right:16px; flex-direction:column; gap:0; padding:8px 20px; background:var(--panel); border:2.5px solid var(--purple); font-size:18px; z-index:3}
+  .top.open nav{display:flex}
+  .top nav a{padding:12px 0; border-bottom:1.5px solid var(--swoosh)}
+  .top nav a:last-child{border-bottom:0}
+}
 
 /* hero */
 .hero{position:relative; padding:40px 0 90px; overflow:hidden}
 body{position:relative}
 .top,main,footer{position:relative; z-index:1}
+header.top{z-index:3} /* opengeklapt mobiel menu over de pagina heen */
 #trail{position:absolute; top:0; left:0; width:100%; pointer-events:none; z-index:0; overflow:visible}
 #trail path{fill:none; stroke-linecap:round; stroke-linejoin:round}
 #trail .track{stroke:var(--swoosh); stroke-width:12}

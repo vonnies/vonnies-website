@@ -9,7 +9,8 @@ Een statische website (één pagina) voor **Vonnies Wax & Slijp Service**: Jeroe
 ```
 index.html        de hele pagina (HTML + JSON-LD bedrijfsgegevens in <head>)
 css/style.css     alle opmaak, incl. dark mode
-js/main.js        keuzehulp (wax/slijpadvies) + de meebewegende sliert
+js/main.js        mobiel menu + keuzehulp (wax/slijpadvies) + de meebewegende sliert
+_config.yml       bepaalt wat GitHub Pages NIET publiceert (CLAUDE.md, README.md, docs/, tools/, brand/)
 img/              foto's (webp), logo, favicon, deelafbeelding
 brand/            logo-bestanden, merkverhaal en kleurcodes (alleen lokaal: staat in .gitignore, niet publiceren of aan linken)
 docs/content.md   achtergrond: wax- en slijpgegevens zoals op de intake-posters
@@ -88,6 +89,8 @@ Lokaal bekijken: `python3 -m http.server 8000` in de repo-map en open http://loc
 - `<title>`, meta description, Open Graph-tags en `canonical` staan in de `<head>`.
 - JSON-LD `LocalBusiness` moet altijd gelijk lopen met de zichtbare feiten (adres, tijden, prijzen). Google vergelijkt dit ook met het Google Bedrijfsprofiel: houd naam, adres en telefoon overal identiek.
 - Werk `sitemap.xml` (`lastmod`) bij na inhoudelijke wijzigingen.
+- **Geen verborgen tekst** (witte tekst, `font-size:0`, `left:-9999px` e.d.): Google ziet dat als spam. Tekst alleen voor screenreaders krijgt de klasse `.sr-only`.
+- **Interne bestanden blijven offline.** GitHub Pages bouwt met Jekyll; `_config.yml` sluit interne bestanden uit. Nieuw intern bestand of nieuwe map? Zet hem in de `exclude`-lijst. Zet geen `.nojekyll` terug, want dan wordt alles weer gepubliceerd.
 - Na grote wijzigingen: test op https://search.google.com/test/rich-results en https://validator.schema.org.
 
 ## Werkwijze
