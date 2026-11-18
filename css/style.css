@@ -22,6 +22,8 @@ body{margin:0; background:var(--bg); color:var(--ink); font-family:Poppins,"Sego
 img{max-width:100%; height:auto; display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--purple); outline-offset:3px; border-radius:4px}
+/* Alleen voor screenreaders (toegankelijkheid). Gebruik dit nooit om zoekwoorden te verstoppen: dat ziet Google als spam. */
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
 
 /* De 90's-handtekening: zwarte letter met paarse verschuiving, net als op de flyer */
 .shout{font-weight:900; text-transform:uppercase; letter-spacing:-.01em; line-height:1.02; color:var(--ink); text-shadow:.07em .07em 0 var(--purple); margin:0}
