@@ -1,6 +1,9 @@
-/* ---- Mobiel menu ---- */
+/* ---- Menubalk: vast bovenaan + mobiel menu ---- */
 (function(){
   var top=document.querySelector('.top'), btn=top&&top.querySelector('.menu-btn');
+  if(!top) return;
+  function stuck(){ top.classList.toggle('scrolled', window.scrollY>8); }
+  window.addEventListener('scroll',stuck,{passive:true}); stuck();
   if(!btn) return;
   function set(open){ top.classList.toggle('open',open); btn.setAttribute('aria-expanded',open?'true':'false'); }
   btn.addEventListener('click',function(){ set(!top.classList.contains('open')); });

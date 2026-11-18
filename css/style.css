@@ -16,7 +16,7 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)} /* ruimte voor de vaste menubalk bij ankerlinks */
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0; background:var(--bg); color:var(--ink); font-family:Poppins,"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif; font-size:17px; line-height:1.6; overflow-x:hidden}
 img{max-width:100%; height:auto; display:block}
@@ -57,7 +57,10 @@ a{color:inherit}
 .hero{position:relative; padding:40px 0 90px; overflow:hidden}
 body{position:relative}
 .top,main,footer{position:relative; z-index:1}
-header.top{z-index:3} /* opengeklapt mobiel menu over de pagina heen */
+/* vaste menubalk: blijft bovenaan staan tijdens het scrollen (desktop én mobiel) */
+header.top{position:sticky; top:0; z-index:3; max-width:none; padding-left:max(24px, calc((100% - 1080px) / 2 + 24px)); padding-right:max(24px, calc((100% - 1080px) / 2 + 24px)); border-bottom:2.5px solid transparent; transition:background-color .2s, border-color .2s, padding .2s}
+header.top.scrolled{background:var(--bg); border-bottom-color:var(--purple); padding-top:10px; padding-bottom:10px}
+@media (prefers-reduced-motion:reduce){header.top{transition:none}}
 #trail{position:absolute; top:0; left:0; width:100%; pointer-events:none; z-index:0; overflow:visible}
 #trail path{fill:none; stroke-linecap:round; stroke-linejoin:round}
 #trail .track{stroke:var(--swoosh); stroke-width:12}
