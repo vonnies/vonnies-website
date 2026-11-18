@@ -197,11 +197,14 @@ section h2.shout{font-size:clamp(34px,5vw,56px); margin-bottom:28px}
 .contact{background:var(--yellow); color:var(--on-yellow); padding:72px 0 48px; margin-top:40px}
 .contact .shout{color:var(--on-yellow); text-shadow:.07em .07em 0 #9D33D6}
 .contact .grid{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:start}
-.contact ul{list-style:none; padding:0; margin:0; font-size:18px; font-weight:600}
+.contact ul{list-style:none; padding:0; margin:0; font-size:clamp(15px,4.1vw,18px); font-weight:600}
 .contact li{margin-bottom:10px}
-.contact .phone{font-size:clamp(30px,4.5vw,44px); font-weight:900; text-decoration:none; display:inline-block; margin-bottom:14px}
 .contact .btn{background:#0B0710; color:#FFEA17; border-color:#0B0710; box-shadow:5px 5px 0 #9D33D6}
 .contact h3{font-size:14px; font-weight:800; letter-spacing:.06em; color:#6b1f96; margin:0 0 4px}
 .contact p{margin:0 0 20px}
+.contact address{font-style:normal; margin:0 0 10px}
+.ico{width:1.2em; height:1.2em; flex:none; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.channels a{display:inline-flex; align-items:center; gap:12px; text-decoration-thickness:2px; text-underline-offset:4px; overflow-wrap:anywhere}
+.channels a:hover{text-decoration-color:#9D33D6}
 .foot{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:48px; padding-top:20px; border-top:2px solid #0B0710; font-size:14px; font-weight:600}
 @media (max-width:760px){.contact .grid{grid-template-columns:1fr}}
