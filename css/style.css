@@ -250,3 +250,18 @@ section h2.shout{font-size:clamp(34px,5vw,56px); margin-bottom:28px}
 .channels a:hover{text-decoration-color:#9D33D6}
 .foot{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:48px; padding-top:20px; border-top:2px solid #0B0710; font-size:14px; font-weight:600}
 @media (max-width:760px){.contact .grid{grid-template-columns:1fr}}
+
+/* Voorheen inline style-attributen; verplaatst zodat de Content-Security-Policy geen 'unsafe-inline' nodig heeft */
+.ph.p1 img{object-position:40% 50%}
+.ph.p2 img{object-position:60% 40%}
+.ph.p3 img{object-position:50% 35%}
+.ph.p5 img{object-position:64% 50%}
+.ph.p6 img{object-position:50% 45%}
+.ph.m1 img{object-position:50% 45%}
+.ph.m2 img{object-position:50% 35%}
+.ph.m3 img{object-position:60% 50%}
+.ph.m4 img{object-position:55% 55%}
+.ph.m5 img{object-position:60% 55%}
+.table-scroll{overflow-x:auto}
+.shout.spaced{margin-top:72px}
+.btns.btns-contact{margin:10px 0 30px}
