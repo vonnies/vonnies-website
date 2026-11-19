@@ -128,3 +128,6 @@ Eigen domein koppelen, zodra het domein vastligt:
 - [x] Hotwax-foto’s toegevoegd aan de foto-impressie (`p5`, `p6`).
 - [x] Websitelink in de Instagram-bio gezet.
 - [x] Google Bedrijfsprofiel aangemaakt. Houd naam, adres en telefoon daar altijd gelijk aan deze site.
+- [x] **Cloudflare (gratis) staat vóór GitHub Pages** (19-11-2026). De nameservers bij Versio zijn `bill.ns.cloudflare.com` en `carol.ns.cloudflare.com`: **DNS-wijzigingen doe je voortaan in Cloudflare, niet bij Versio.** De domeinregistratie blijft bij Versio. Instellingen: SSL Full (strict), Always Use HTTPS, en de Response Header Transform Rule “Security headers” (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, CSP; Access-Control-Allow-Origin wordt verwijderd). Score op securityheaders.com: A+. Zie `docs/cloudflare-stappenplan.md`.
+  - De CSP staat op twee plekken: in de Transform Rule in Cloudflare én als meta-tag in `index.html`. Nieuwe externe bron (font, embed, script)? Pas ze **allebei** aan. Geen inline `style="…"` of inline scripts toevoegen, want die blokkeert de CSP.
+- [x] DNSSEC staat aan via Cloudflare (DS key tag 2371, sleutel ingevuld bij Versio, gevalideerd 19-11-2026). **Let op:** ga je ooit weg bij Cloudflare, zet dan eerst DNSSEC bij Versio uit en wacht minimaal 2 uur voordat je de nameservers wijzigt.
