@@ -54,7 +54,7 @@
     var wax=WAX[w][l], e=EDGE[g][l], p=PACK[l];
     var edgeNote = "";
     out.innerHTML =
-      '<div class="r"><h4>Wax</h4><div class="val">'+esc(wax)+'</div><p>'+esc(WAXWHY[wax])+'</p></div>'+
+      '<div class="r"><h4>Wax</h4><div class="val">'+esc(wax)+(wax.indexOf('RB ')===0?' · +€2,50':'')+'</div><p>'+esc(WAXWHY[wax])+'</p></div>'+
       '<div class="r"><h4>Slijpgraad</h4><div class="val">'+esc(e.val)+'</div><p>'+esc(e.why+edgeNote)+'</p></div>'+
       '<div class="r"><h4>Behandeling</h4><div class="val">'+esc(p.val)+' · '+p.price+'</div><p>'+esc(p.why)+'</p></div>';
     var msg = "Hoi Jeroen! Ik wil graag mijn "+(g==='ski'?"ski’s":"snowboard")+" laten doen. Keuzehulp zegt: "+wax+", "+e.val+", "+p.val+". Klopt dat voor mij?";

@@ -41,14 +41,16 @@ Lokaal bekijken: `python3 -m http.server 8000` in de repo-map en open http://loc
 | Alleen waxen (hotwax, met de hand) | €20 | €25 |
 | Waxen + slijpen | €35 | €35 |
 | Waxen + slijpen + vullen (complete beurt) | €45 | €45 |
+| Race Base-wax (incl. indoor, RB White) | +€2,50 | +€2,50 |
 | Topsheetreiniging | +€2,50 | +€2,50 |
 
 **Prijzen of openingstijden wijzigen? Pas ze op ALLE plekken aan:**
 1. de prijstabel in `index.html` (`#prijzen`)
 2. de JSON-LD in de `<head>` van `index.html` (`hasOfferCatalog`, `priceRange`, `openingHoursSpecification`)
 3. `<meta name="description">` en `og:description` (noemen “vanaf €20” en de avonden)
-4. `PACK` in `js/main.js` (keuzehulp noemt €35/€45)
-5. “Zo werkt het” en het contactblok (openingstijden)
+4. `PACK` in `js/main.js` (keuzehulp noemt €35/€45) en de Race Base-toeslag in `render()` (+€2,50 bij RB-wax)
+5. de Race Base-kop in “Welke wax?” en de FAQ “Welke wax gebruik je?” (HTML én JSON-LD)
+6. “Zo werkt het” en het contactblok (openingstijden)
 
 ## Merk en vormgeving
 
