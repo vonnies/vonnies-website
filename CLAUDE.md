@@ -119,6 +119,7 @@ Geen Google Analytics of andere externe tracker: een eigen teller zonder cookies
   - `keuzehulp`: ingevulde keuzehulp als `gear/when/level`, bijv. `board/mid/sport`
   - `gezien`: een sectie is in beeld gekomen (één keer per paginaweergave), dus hoe ver mensen scrollen
 - Cloudflare Worker **`vonnies-stats`** (route `*vonnieswaxenslijpservice.nl/api/e`, fail open, workers.dev-adres uit) schrijft ze naar D1-database **`vonnies-stats`** (EU-jurisdictie, binding `DB`). Hij weigert andere origins, negeert bots en kent per dag een anonieme bezoekerscode toe (hash met een dagzout dat de volgende dag wordt weggegooid).
+- Beveiliging: rate limiting rule **“Limiet klikteller /api/e”** (Security → Security rules; max. 20 verzoeken per 10 seconden per IP, daarna 10 seconden blokkade; de enige gratis rate-limitregel). Workers Logs staan **uit** voor de Worker, zodat Cloudflare geen verzoekgegevens (zoals IP-adressen) van de teller bewaart.
 - Broncode staat in `worker/stats-worker.js` en `worker/schema.sql`. **De Worker wordt niet automatisch gedeployed**: na een wijziging de code in het Cloudflare-dashboard (Workers & Pages → vonnies-stats → Edit code) plakken of typen en op Deploy drukken.
 - Nieuwe knop of sectie? Geen extra code nodig: links en `section[id]` worden automatisch gemeten. Geef een nieuwe sectie wel een `id`.
 - Cijfers bekijken: Cloudflare → Storage & databases → D1 → vonnies-stats → Console. Voorbeelden:
