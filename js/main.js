@@ -62,6 +62,64 @@
     ask.textContent = "Stuur dit advies naar Jeroen";
   }
   document.querySelectorAll('.helper input').forEach(function(i){i.addEventListener('change',render)});
+  var lastAdvice='';
+  document.querySelectorAll('.helper input').forEach(function(i){i.addEventListener('change',function(){
+    var g=val('gear'), w=val('when'), l=val('level'), k=g+'/'+w+'/'+l;
+    if(g&&w&&l&&k!==lastAdvice&&window.vonniesMeet){ lastAdvice=k; window.vonniesMeet('keuzehulp',{l:k,s:'keuzehulp'}); }
+  })});
+})();
+
+/* ---- Eigen bezoekers- en klikteller (Cloudflare Worker op /api/e, geen cookies) ---- */
+(function(){
+  var live=/(^|\.)vonnieswaxenslijpservice\.nl$/.test(location.hostname);
+  function meet(t,d){
+    d=d||{}; d.t=t;
+    if(!live){ if(window.console) console.debug('[meting]',d); return; }
+    try{
+      var body=new Blob([JSON.stringify(d)],{type:'text/plain'});
+      if(!(navigator.sendBeacon && navigator.sendBeacon('/api/e',body))){
+        fetch('/api/e',{method:'POST',body:body,keepalive:true,credentials:'omit'}).catch(function(){});
+      }
+    }catch(e){}
+  }
+  window.vonniesMeet=meet;
+
+  var ref='';
+  try{ if(document.referrer){ var h=new URL(document.referrer).hostname; if(h!==location.hostname) ref=h; } }catch(e){}
+  meet('bezoek',{l:location.pathname,r:ref});
+
+  function soort(a){
+    var h=a.getAttribute('href')||'';
+    if(/wa\.me/.test(h)) return h.indexOf('text=')>-1?'whatsapp-advies':'whatsapp';
+    if(h.indexOf('tel:')===0) return 'bellen';
+    if(h.indexOf('mailto:')===0) return 'mail';
+    if(/instagram\.com/.test(h)) return 'instagram';
+    if(/maps\.google|google\.[a-z.]+\/maps/.test(h)) return 'maps';
+    if(h.charAt(0)==='#') return a.closest('nav')?'menu '+h:'link '+h;
+    try{ return new URL(h,location.href).hostname; }catch(e){ return h; }
+  }
+  function sectie(el){
+    if(el.closest('.hero')) return 'hero';
+    var s=el.closest('section[id],footer[id],header,nav');
+    return s?(s.id||s.tagName.toLowerCase()):'';
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]');
+    if(a){ meet('klik',{l:soort(a),s:sectie(a),x:(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,60)}); return; }
+    var b=e.target.closest&&e.target.closest('.menu-btn');
+    if(b) meet('klik',{l:'menuknop',s:'header'});
+  },true);
+
+  if('IntersectionObserver' in window){
+    var seen={};
+    var io=new IntersectionObserver(function(list){
+      list.forEach(function(en){
+        var id=en.target.id;
+        if(en.isIntersecting && !seen[id]){ seen[id]=1; io.unobserve(en.target); meet('gezien',{l:id}); }
+      });
+    },{rootMargin:'0px 0px -40% 0px'});
+    document.querySelectorAll('main section[id], footer[id]').forEach(function(s){ io.observe(s); });
+  }
 })();
 
 /* ---- Scroll-sliert ---- */

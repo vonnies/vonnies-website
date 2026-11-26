@@ -7,4 +7,5 @@ exclude:
   - docs
   - tools
   - brand
+  - worker
   - .gitignore

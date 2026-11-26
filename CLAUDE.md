@@ -9,8 +9,9 @@ Een statische website (één pagina) voor **Vonnies Wax & Slijp Service**: Jeroe
 ```
 index.html        de hele pagina (HTML + JSON-LD bedrijfsgegevens in <head>)
 css/style.css     alle opmaak, incl. dark mode
-js/main.js        mobiel menu + keuzehulp (wax/slijpadvies) + de meebewegende sliert
-_config.yml       bepaalt wat GitHub Pages NIET publiceert (CLAUDE.md, README.md, docs/, tools/, brand/)
+js/main.js        mobiel menu + keuzehulp (wax/slijpadvies) + de meebewegende sliert + eigen bezoekers-/klikteller
+worker/           Cloudflare Worker + databaseschema van de klikteller (staat niet online, zie "Bezoekers en klikken")
+_config.yml       bepaalt wat GitHub Pages NIET publiceert (CLAUDE.md, README.md, docs/, tools/, brand/, worker/)
 img/              foto's (webp), logo, favicon, deelafbeelding
 brand/            logo-bestanden, merkverhaal en kleurcodes (alleen lokaal: staat in .gitignore, niet publiceren of aan linken)
 docs/content.md   achtergrond: wax- en slijpgegevens zoals op de intake-posters
@@ -105,8 +106,26 @@ Lokaal bekijken: `python3 -m http.server 8000` in de repo-map en open http://loc
    - licht én donker thema bekeken
    - prijzen/tijden overal gelijk (zie lijst hierboven)
    - geen kapotte afbeeldingen, alle `img` hebben `alt`
-4. Geen externe scripts of trackers toevoegen zonder overleg (privacy + snelheid).
+4. Geen externe scripts of trackers toevoegen zonder overleg (privacy + snelheid). De eigen klikteller (zie "Bezoekers en klikken") is afgestemd met Michelle.
 5. **CSS of JS aangepast? Verhoog het versienummer** achter `css/style.css?v=…` en `js/main.js?v=…` in `index.html` (gebruik de datum, bijv. `?v=20261118`). GitHub Pages laat browsers bestanden 10 minuten bewaren; zonder nieuw versienummer krijgen bezoekers na een release de nieuwe HTML met de oude CSS/JS, en dan werkt bijvoorbeeld het menu niet.
+
+## Bezoekers en klikken (eigen teller, sinds 26-11-2026)
+
+Geen Google Analytics of andere externe tracker: een eigen teller zonder cookies en zonder opgeslagen IP-adressen. Daardoor is geen cookiebanner nodig en hoeft de CSP niet aangepast te worden (`connect-src 'self'`).
+
+- `js/main.js` (onderste blok) stuurt met `navigator.sendBeacon` meldingen naar `/api/e`. Alleen op het echte domein; op localhost logt hij ze met `console.debug('[meting]', …)`.
+  - `bezoek`: elke paginaweergave (`label` = pad, `ref` = domein waar de bezoeker vandaan kwam)
+  - `klik`: elke link of knop (`label` = whatsapp, whatsapp-advies, bellen, mail, instagram, maps, `menu #…`, `link #…` of extern domein; `section` = waar op de pagina; `tekst` = knoptekst). Ook `menuknop`.
+  - `keuzehulp`: ingevulde keuzehulp als `gear/when/level`, bijv. `board/mid/sport`
+  - `gezien`: een sectie is in beeld gekomen (één keer per paginaweergave), dus hoe ver mensen scrollen
+- Cloudflare Worker **`vonnies-stats`** (route `*vonnieswaxenslijpservice.nl/api/e`, fail open, workers.dev-adres uit) schrijft ze naar D1-database **`vonnies-stats`** (EU-jurisdictie, binding `DB`). Hij weigert andere origins, negeert bots en kent per dag een anonieme bezoekerscode toe (hash met een dagzout dat de volgende dag wordt weggegooid).
+- Broncode staat in `worker/stats-worker.js` en `worker/schema.sql`. **De Worker wordt niet automatisch gedeployed**: na een wijziging de code in het Cloudflare-dashboard (Workers & Pages → vonnies-stats → Edit code) plakken of typen en op Deploy drukken.
+- Nieuwe knop of sectie? Geen extra code nodig: links en `section[id]` worden automatisch gemeten. Geef een nieuwe sectie wel een `id`.
+- Cijfers bekijken: Cloudflare → Storage & databases → D1 → vonnies-stats → Console. Voorbeelden:
+  - bezoekers per dag: `SELECT substr(ts,1,10) AS dag, count(*) AS weergaven, count(DISTINCT visitor) AS bezoekers FROM events WHERE type='bezoek' GROUP BY dag ORDER BY dag DESC;`
+  - waar wordt op geklikt: `SELECT label, section, count(*) AS n FROM events WHERE type='klik' GROUP BY label, section ORDER BY n DESC;`
+  - hoe ver scrollen mensen: `SELECT label, count(*) AS n FROM events WHERE type='gezien' GROUP BY label ORDER BY n DESC;`
+- Gratis limiet D1: 100.000 schrijfacties per dag; ruim voldoende.
 
 ## Eerste keer opzetten (GitHub Pages)
 
